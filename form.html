@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Registration Form</title>
+<style>
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+}
+
+form {
+    width: 350px;
+    margin: 50px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 9px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #007BFF;
+}
+
+button {
+    margin-top: 18px;
+    padding: 10px;
+    width: 100%;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* radio spacing */
+input[type="radio"] {
+    width: auto;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<form>
+<h2>Student Registration</h2>
+
+<label>Full Name:
+<input type="text" required>
+</label>
+
+<label>Roll No:
+<input type="text" required>
+</label>
+
+<label>Email:
+<input type="email">
+</label>
+
+<label>Date of Birth:
+<input type="date">
+</label>
+
+<label>Program:
+<select>
+<option>BS-CS</option>
+<option>BS-SE</option>
+<option>BS-IT</option>
+</select>
+</label>
+
+<label>Student Type:
+    
+</label>
+<input type="radio" name="type"> Full-Time
+<input type="radio" name="type"> Part-Time
+
+<button type="submit">Register</button>
+
+
+</form>
+
+</body>
+</html>
