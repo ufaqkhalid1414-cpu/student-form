@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Enrollment Form</title>
+
+<style>
+body {
+    font-family: Verdana;
+    background-color: #eef2f7;
+}
+
+.container {
+    width: 400px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+}
+
+input:focus, select:focus {
+    border-color: #28a745;
+}
+
+button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.type-section {
+    margin-top: 10px;
+}
+
+.type-section input {
+    width: auto;
+}
+
+.extra {
+    display: none;
+}
+</style>
+
+<script>
+function showExtra() {
+    let type = document.querySelector('input[name="student_type"]:checked').value;
+
+    document.getElementById("fullBox").style.display = (type === "full") ? "block" : "none";
+    document.getElementById("partBox").style.display = (type === "part") ? "block" : "none";
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+<h2>Student Enrollment Form</h2>
+
+<form>
+
+<label>Student Name</label>
+<input type="text" name="student_name" placeholder="Enter full name" required>
+
+<label>Roll Number</label>
+<input type="text" name="student_roll" placeholder="e.g. 22-CS-101" required>
+
+<label>Email Address</label>
+<input type="email" name="student_email" placeholder="example@email.com">
+
+<label>Date of Birth</label>
+<input type="date" name="dob">
+
+<label>Program</label>
+<select name="program">
+<option>BS Computer Science</option>
+<option>BS Software Engineering</option>
+<option>BS Information Technology</option>
+</select>
+
+<label>Select Course</label>
+<select name="course">
+<option>Database Systems</option>
+<option>Object Oriented Programming</option>
+<option>Data Structures</option>
+</select>
+
+<label>Marks Obtained</label>
+<input type="number" name="marks" placeholder="Enter marks">
+
+<label>Grade</label>
+<input type="text" name="grade" placeholder="e.g. A, B+">
+
+<label>Student Category</label>
+<div class="type-section">
+<input type="radio" name="student_type" value="full" onclick="showExtra()"> Full-Time
+<input type="radio" name="student_type" value="part" onclick="showExtra()"> Part-Time
+</div>
+
+<div id="fullBox" class="extra">
+<label>Scholarship Details</label>
+<input type="text" name="scholarship" placeholder="Scholarship info">
+</div>
+
+<div id="partBox" class="extra">
+<label>Working Hours (per week)</label>
+<input type="number" name="work_hours" placeholder="e.g. 20">
+</div>
+
+<button type="submit">Submit Form</button>
+
+</form>
+</div>
+
+</body>
+</html>
+```
