@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration Form</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      padding: 30px 16px;
+    }
+
+    .form-container {
+      max-width: 680px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    /* ── Header ── */
+    .form-header {
+      background: #1a1a2e;
+      padding: 28px 32px;
+      color: #fff;
+    }
+
+    .form-header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .form-header p {
+      font-size: 13px;
+      color: #a0a8c0;
+      margin-top: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #4f8ef7;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+      margin-left: 10px;
+      vertical-align: middle;
+      letter-spacing: 0.4px;
+    }
+
+    /* ── Form Body ── */
+    .form-body {
+      padding: 28px 32px 32px;
+    }
+
+    /* ── Section Label ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      margin: 28px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ebebeb;
+    }
+
+    .section-label:first-child {
+      margin-top: 0;
+    }
+
+    /* ── Grid Rows ── */
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .row.full {
+      grid-template-columns: 1fr;
+    }
+
+    .row.tri {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    /* ── Field ── */
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .field label .required-star {
+      color: #e53e3e;
+      margin-left: 2px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      height: 38px;
+      padding: 0 12px;
+      border: 1px solid #dde1e7;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #333;
+      background: #fafbfc;
+      font-family: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+      outline: none;
+      width: 100%;
+    }
+
+    .field textarea {
+      height: 78px;
+      padding: 10px 12px;
+      resize: none;
+    }
+
+    .field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+      cursor: pointer;
+    }
+
+    .field select[multiple] {
+      height: 96px;
+      padding: 8px 12px;
+      background-image: none;
+      cursor: auto;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #4f8ef7;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.12);
+    }
+
+    .field input.error,
+    .field select.error {
+      border-color: #e53e3e;
+      background: #fff5f5;
+    }
+
+    .field input.error:focus,
+    .field select.error:focus {
+      box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.12);
+    }
+
+    /* read-only / disabled */
+    .field input[readonly] {
+      opacity: 0.55;
+      cursor: not-allowed;
+      background: #f0f1f4;
+    }
+
+    /* ── Error message ── */
+    .err-msg {
+      font-size: 11px;
+      color: #e53e3e;
+      display: none;
+    }
+
+    .err-msg.show {
+      display: block;
+    }
+
+    /* ── Helper text ── */
+    .helper {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* ── Footer ── */
+    .form-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #ebebeb;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, opacity 0.15s;
+      border: none;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid #dde1e7;
+      color: #666;
+    }
+
+    .btn-ghost:hover {
+      background: #f4f6f9;
+    }
+
+    .btn-primary {
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.85;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.97);
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: #1a1a2e;
+      color: #fff;
+      font-size: 13px;
+      padding: 11px 22px;
+      border-radius: 99px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      white-space: nowrap;
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 540px) {
+      .form-body { padding: 20px 18px 24px; }
+      .form-header { padding: 22px 18px; }
+      .row, .row.tri { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+
+    <!-- Header -->
+    <div class="form-header">
+      <h1>Student Registration <span class="badge">New Record</span></h1>
+      <p>Fields marked with * are required. Data is saved to the Student Result Management System.</p>
+    </div>
+
+    <!-- Form Body -->
+    <div class="form-body">
+
+      <!-- Personal Information -->
+      <div class="section-label">Personal Information</div>
+
+      <div class="row">
+        <div class="field">
+          <label for="fname">First Name <span class="required-star">*</span></label>
+          <input type="text" id="fname" placeholder="e.g. Ayesha">
+          <span class="err-msg" id="fname-err">First name is required</span>
+        </div>
+        <div class="field">
+          <label for="lname">Last Name <span class="required-star">*</span></label>
+          <input type="text" id="lname" placeholder="e.g. Raza">
+          <span class="err-msg" id="lname-err">Last name is required</span>
+        </div>
+      </div>
+
+      <div class="row tri">
+        <div class="field">
+          <label for="dob">Date of Birth <span class="required-star">*</span></label>
+          <input type="date" id="dob">
+          <span class="err-msg" id="dob-err">Date of birth is required</span>
+        </div>
+        <div class="field">
+          <label for="gender">Gender <span class="required-star">*</span></label>
+          <select id="gender">
+            <option value="">Select…</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Prefer not to say</option>
+          </select>
+          <span class="err-msg" id="gender-err">Please select gender</span>
+        </div>
+        <div class="field">
+          <label for="sid">Student ID</label>
+          <input type="text" id="sid" placeholder="Auto-generated" readonly>
+          <span class="helper">Assigned by system</span>
+        </div>
+      </div>
+
+      <!-- Contact Details -->
+      <div class="section-label">Contact Details</div>
+
+      <div class="row">
+        <div class="field">
+          <label for="email">Email Address <span class="required-star">*</span></label>
+          <input type="email" id="email" placeholder="student@university.edu">
+          <span class="err-msg" id="email-err">Enter a valid email address</span>
+        </div>
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+92 300 0000000">
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="field">
+          <label for="address">Address</label>
+          <textarea id="address" placeholder="Street, City, Province"></textarea>
+        </div>
+      </div>
+
+      <!-- Academic Information -->
+      <div class="section-label">Academic Information</div>
+
+      <div class="row tri">
+        <div class="field">
+          <label for="dept">Department <span class="required-star">*</span></label>
+          <select id="dept" onchange="loadCourses()">
+            <option value="">Select…</option>
+            <option>Computer Science</option>
+            <option>Software Engineering</option>
+            <option>Electrical Engineering</option>
+            <option>Business Administration</option>
+            <option>Mathematics</option>
+          </select>
+          <span class="err-msg" id="dept-err">Department is required</span>
+        </div>
+        <div class="field">
+          <label for="semester">Semester <span class="required-star">*</span></label>
+          <select id="semester">
+            <option value="">Select…</option>
+            <option>1st Semester</option>
+            <option>2nd Semester</option>
+            <option>3rd Semester</option>
+            <option>4th Semester</option>
+            <option>5th Semester</option>
+            <option>6th Semester</option>
+            <option>7th Semester</option>
+            <option>8th Semester</option>
+          </select>
+          <span class="err-msg" id="semester-err">Semester is required</span>
+        </div>
+        <div class="field">
+          <label for="year">Enrollment Year <span class="required-star">*</span></label>
+          <select id="year">
+            <option value="">Select…</option>
+            <option>2022</option>
+            <option>2023</option>
+            <option>2024</option>
+            <option>2025</option>
+            <option>2026</option>
+          </select>
+          <span class="err-msg" id="year-err">Year is required</span>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="field">
+          <label for="courses">Enrolled Courses
+            <span class="helper" style="font-weight:400; margin-left:4px;">(Select department first · Hold Ctrl to pick multiple)</span>
+          </label>
+          <select id="courses" multiple>
+            <option disabled>— Select department first —</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="form-footer">
+        <button class="btn btn-ghost" onclick="resetForm()">Clear</button>
+        <button class="btn btn-primary" onclick="submitForm()">Save Student →</button>
+      </div>
+
+    </div><!-- /form-body -->
+  </div><!-- /form-container -->
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const coursesMap = {
+      'Computer Science':       ['CS101 – Intro to Programming','CS201 – Data Structures','CS301 – Algorithms','CS401 – Database Systems','CS501 – Software Engineering'],
+      'Software Engineering':   ['SE101 – Fundamentals of SE','SE201 – Requirements Engineering','SE301 – Software Design','SE401 – Testing & QA','SE501 – Project Management'],
+      'Electrical Engineering': ['EE101 – Circuit Analysis','EE201 – Digital Electronics','EE301 – Signals & Systems','EE401 – Microprocessors','EE501 – Power Systems'],
+      'Business Administration':['BA101 – Principles of Management','BA201 – Accounting','BA301 – Marketing','BA401 – Finance','BA501 – Business Law'],
+      'Mathematics':            ['MA101 – Calculus I','MA201 – Linear Algebra','MA301 – Statistics','MA401 – Numerical Methods','MA501 – Discrete Mathematics'],
+    };
+
+    function loadCourses() {
+      const dept = document.getElementById('dept').value;
+      const sel  = document.getElementById('courses');
+      sel.innerHTML = '';
+      if (!dept || !coursesMap[dept]) {
+        sel.innerHTML = '<option disabled>— Select department first —</option>';
+        return;
+      }
+      coursesMap[dept].forEach(c => {
+        const o = document.createElement('option');
+        o.value = c; o.textContent = c;
+        sel.appendChild(o);
+      });
+    }
+
+    function validate() {
+      const rules = [
+        { id: 'fname',    errId: 'fname-err',    check: v => v.trim() !== '' },
+        { id: 'lname',    errId: 'lname-err',    check: v => v.trim() !== '' },
+        { id: 'dob',      errId: 'dob-err',      check: v => v.trim() !== '' },
+        { id: 'gender',   errId: 'gender-err',   check: v => v !== '' },
+        { id: 'email',    errId: 'email-err',    check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+        { id: 'dept',     errId: 'dept-err',     check: v => v !== '' },
+        { id: 'semester', errId: 'semester-err', check: v => v !== '' },
+        { id: 'year',     errId: 'year-err',     check: v => v !== '' },
+      ];
+      let ok = true;
+      rules.forEach(({ id, errId, check }) => {
+        const el  = document.getElementById(id);
+        const err = document.getElementById(errId);
+        const valid = check(el.value);
+        el.classList.toggle('error', !valid);
+        err.classList.toggle('show', !valid);
+        if (!valid) ok = false;
+      });
+      return ok;
+    }
+
+    function submitForm() {
+      if (!validate()) return;
+      showToast('✓ Student record saved successfully!');
+    }
+
+    function resetForm() {
+      ['fname','lname','dob','gender','email','phone','address','dept','semester','year'].forEach(id => {
+        const el = document.getElementById(id);
+        el.value = '';
+        el.classList.remove('error');
+      });
+      document.querySelectorAll('.err-msg').forEach(e => e.classList.remove('show'));
+      document.getElementById('courses').innerHTML = '<option disabled>— Select department first —</option>';
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+  </script>
+</body>
+</html>
