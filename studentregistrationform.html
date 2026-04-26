@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Enrollment Form</title>
+
+<style>
+body {
+    font-family: Verdana;
+    background-color: #eef2f7;
+}
+
+.container {
+    width: 400px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+h2 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+/* normal inputs */
+input, select {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+}
+
+/* radio fix */
+input[type="radio"] {
+    width: auto;
+}
+
+.type-section {
+    margin-top: 10px;
+}
+
+.extra {
+    display: none;
+}
+</style>
+
+<script>
+function showExtra() {
+    let selected = document.querySelector('input[name="student_type"]:checked');
+    if (!selected) return;
+
+    document.getElementById("fullBox").style.display =
+        (selected.value === "full") ? "block" : "none";
+
+    document.getElementById("partBox").style.display =
+        (selected.value === "part") ? "block" : "none";
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+<h2>Student Enrollment Form</h2>
+
+<form>
+
+<label>Student Name</label>
+<input type="text" name="student_name" required>
+
+<label>Roll Number</label>
+<input type="text" name="student_roll" required>
+
+<label>Email</label>
+<input type="email" name="student_email" required>
+
+<label>Date of Birth</label>
+<input type="date" name="dob" required>
+
+<label>Program</label>
+<select name="program" required>
+    <option value="">Select</option>
+    <option>BS CS</option>
+    <option>BS SE</option>
+    <option>BS IT</option>
+</select>
+
+<label>Course</label>
+<select name="course" required>
+    <option value="">Select</option>
+    <option>DBS</option>
+    <option>OOP</option>
+    <option>DSA</option>
+</select>
+
+<label>Marks</label>
+<input type="number" name="marks" min="0" max="100" required>
+
+<label>Grade</label>
+<input type="text" name="grade" required>
+
+<label>Student Type</label>
+<div class="type-section">
+    <input type="radio" name="student_type" value="full" onclick="showExtra()" required> Full-Time
+    <input type="radio" name="student_type" value="part" onclick="showExtra()" required> Part-Time
+</div>
+
+<div id="fullBox" class="extra">
+    <label>Scholarship</label>
+    <input type="text" name="scholarship">
+</div>
+
+<div id="partBox" class="extra">
+    <label>Working Hours</label>
+    <input type="number" name="work_hours">
+</div>
+
+<br>
+<button type="submit">Submit</button>
+
+</form>
+</div>
+
+</body>
+</html>
